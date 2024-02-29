@@ -1,0 +1,18 @@
+.header__content {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+}
+
+.header__nav {
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+}
+
+.header__nav__link {
+  text-decoration: none;
+}

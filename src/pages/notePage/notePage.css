@@ -1,0 +1,10 @@
+.cards {
+  margin: 0 auto;
+  max-width: 500px;
+  height: auto;
+  background: #ffff;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 0 0 5px 10px;
+}
