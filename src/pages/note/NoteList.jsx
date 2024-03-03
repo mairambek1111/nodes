@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../../components/header/header";
 import Context from "../../Context";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import "./noteLIst.css";
 import { Button } from "antd";
 function NoteList() {
   const { data, setdata } = useContext(Context);
-
+  const [finish, setfinish] = useState([]);
   const nav = useNavigate();
   function navToPage(id) {
     nav(`/notepage/${id}`);
@@ -25,6 +25,11 @@ function NoteList() {
     let delt = data.filter((el) => el.id !== id);
     setdata(delt);
   }
+
+  function clickFinishHandler(id, e) {
+    e.stopPropagation();
+    setfinish([...finish, id]);
+  }
   return (
     <>
       <Header />
@@ -36,7 +41,10 @@ function NoteList() {
               key={id}
               onClick={() => navToPage(el.id)}
             >
-              <h2 className="note__list__title">
+              <h2
+                className="note__list__title"
+                style={{ color: finish.includes(el.id) ? "green" : "black" }}
+              >
                 <>{el.title}</>
                 <br />
                 <br />
@@ -47,13 +55,18 @@ function NoteList() {
                 >
                   EDIT
                 </Button>
-
+                <Button
+                  onClick={(e) => clickFinishHandler(el.id, e)}
+                  type="primary"
+                >
+                  finish
+                </Button>
                 <Button
                   danger
                   type="primary"
                   className="delete__btn"
                   onClick={(e) => {
-                    e.stopPropagation(), deleteClickHandler(e);
+                    e.stopPropagation(), deleteClickHandler(el.id);
                   }}
                 >
                   DELETE
